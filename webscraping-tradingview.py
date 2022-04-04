@@ -68,7 +68,7 @@ for row in rows[:5]:
     change_text = cols[2].text
     change_float = float(cols[2].text.strip('%'))
 
-    s_price = round(price/(1+change_float),2)
+    s_price = round(price/(1+change_float/100),2)
 
     print(f"Compnay Name: {name}")
     print(f"Current Price: {price}")
