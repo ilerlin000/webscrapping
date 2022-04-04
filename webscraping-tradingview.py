@@ -48,3 +48,31 @@ for company in companies[:5]:
 #Limit = find with limit of 1
 #keyword: allText = Obj.find(id="title",class="text")
 
+stock_table = soup.findAll('tbody')
+# tbody means the body of the table
+
+stock_table = stock_table[0]
+# first element in the list 0 - first full table
+
+rows = stock_table.findAll('tr')
+# tr = table rows 
+
+for row in rows[:5]:
+    cols = row.findAll('td')
+    print(cols[0])
+    # extract the name, price, change %
+    name = cols[0].find("span",attrs ={'class':'tv-screener__description'})
+    name = name.text.strip()
+    price = float(cols[1].text)
+# change % - cannot use float bc it has a % in it - so you have to strip 
+    change_text = cols[2].text
+    change_float = float(cols[2].text.strip('%'))
+
+    s_price = round(price/(1+change_float),2)
+
+    print(f"Compnay Name: {name}")
+    print(f"Current Price: {price}")
+    print(f"% Change: {change_text}")
+    print(f"Starting Price: {s_price}")
+    input()
+
